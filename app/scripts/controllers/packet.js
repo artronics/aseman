@@ -4,9 +4,17 @@ angular.module('asemanApp')
     .controller('PacketCtrl',['PacketService','Restangular',function (PacketService,Restangular) {
         var self = this;
 
-        //var packetsObj = Restangular.all('packets').getList;
-        //self.packets = packetsObj.packets;
-        //self.packets = {kir:'los',kos:[{kd:'dool'},{kj:'st'}]}
-        self.packets = Restangular.all('packets').getList();
-        console.log(self.packets);
+        var packetObjects = PacketService.getList().$object;
+        console.log(packetObjects);
+        self.packets = packetObjects;
+        //self.packets = [];
+        //
+        //var packet = {
+        //    id:1,
+        //    netId:12,
+        //};
+        //self.packets.push(packet);
+
+        //self.packets = PacketService.getList().$object;
+        //console.log('here',self.packets);
     }]);

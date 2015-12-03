@@ -11,7 +11,10 @@
             </div>
             <div class="panel-body">
                 <div ui-grid="{ data:  packetCtrl.packets}" class="packets"></div>
-                <p ng-bind="packetCtrl.packets.lastPacketId"></p>
+                <div ng-repeat="packet in packetCtrl.packets">
+                    <h4 ng-bind="packet.lastPacketId"></h4>
+                </div>
+                <!--<p ng-bind="packetCtrl.packets.lastPacketId"></p>-->
             </div>
         </div>
     </div>
