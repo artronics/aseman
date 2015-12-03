@@ -11,6 +11,10 @@ angular.module('asemanApp')
             CONNECTED:3
         });
 
+        config.network={
+            isStarted : false,
+        };
+
         config.db = {
             status : ConnectionStatus.NOT_CONFIG,
             url:'127.1.1.1:3306',
