@@ -38,6 +38,19 @@ angular
             selfLink: 'self.href',
         });
 
+        RestangularProvider
+            .setResponseExtractor(function(response) {
+                var newResponse = response;
+                if (angular.isArray(response)) {
+                    angular.forEach(newResponse, function(value, key) {
+                        newResponse[key].originalElement = angular.copy(value);
+                    });
+                } else {
+                    newResponse.originalElement = angular.copy(response);
+                }
+
+                return newResponse;
+            });
         // add a response interceptor
         //RestangularProvider.addResponseInterceptor(
         //    function (data, operation, what, url, response, deferred) {

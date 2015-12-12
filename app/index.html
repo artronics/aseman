@@ -8,12 +8,14 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css"/>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.css">
+    <link rel="stylesheet" href="styles/controllerPannel.css">
+    <link rel="stylesheet"
+          href="https://cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.css">
     <!-- endbuild -->
 </head>
 <body ng-app="asemanApp">
@@ -46,7 +48,10 @@
                         <a href="#/" data-toggle="modal" data-target="#dbConfig"
                            class="fa fa-2x fa-database"></a>
                     </li>
-                    <li><a ng-href="#/about">About</a></li>
+                    <li class="active ">
+                        <a href="#/" data-toggle="modal" data-target="#sendPacket"
+                           class="fa fa-2x fa-paper-plane"></a>
+                    </li>
                     <li><a ng-href="#/">Contact</a></li>
                 </ul>
             </div>
@@ -64,6 +69,56 @@
     </div>
 </div>
 
+<!--Send Packet Modal-->
+<div class="modal fade" id="sendPacket" tabindex="-1" role="dialog" aria-labelledby="sendPacketLbl">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title " id="sendPacketLbl"><span class="fa fa-1x fa-paper-plane">  Send Packet</span>
+                </h4>
+            </div>
+
+            <div class="modal-body" ng-controller="SendPacketCtrl as sendPacket">
+
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="packetType">Type</label>
+                        <select name="type" id="packetType">
+                            <option value="data">DATA</option>
+                            <option value="openPath">OPEN_PATH</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="srcAdd">Source Address:</label>
+                        <input type="text" id="srcAdd" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="dstAdd">Destination Address:</label>
+                        <input type="text" id="dstAdd" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="ctrlIpFrom">From:</label>
+                        <select class="form-control" id="ctrlIpFrom" ng-repeat="ctrl in sendPacket.controllers">
+                            <option>{{ctrl.ip}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ctrlIpTo">To:</label>
+                        <select class="form-control" id="ctrlIpTo" ng-repeat="ctrl in sendPacket.controllers">
+                            <option>{{ctrl.ip}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!--Modal: Database Config-->
 <div class="modal fade" id="dbConfig" tabindex="-1" role="dialog" aria-labelledby="dbConfigLbl">
     <div class="modal-dialog" role="document">
@@ -138,8 +193,11 @@
 <script src="scripts/controllers/main.js"></script>
 <script src="scripts/controllers/dbConfig.js"></script>
 <script src="scripts/controllers/packet.js"></script>
+<script src="scripts/controllers/controller.js"></script>
+<script src="scripts/controllers/sendPacket.js"></script>
 <script src="scripts/services/configService.js"></script>
 <script src="scripts/services/packetService.js"></script>
+<script src="scripts/services/controllerService.js"></script>
 <!-- endbuild -->
 </body>
 </html>
