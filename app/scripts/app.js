@@ -26,6 +26,12 @@ angular
                 controller: 'MainCtrl',
                 controllerAs: 'main'
             })
+            .when('/sendPacket',{
+                templateUrl: 'views/sendPacket.html',
+                controller: 'SendPacketCtrl',
+                controllerAs: 'sendPacket'
+            })
+
             .otherwise({
                 redirectTo: '/'
             });
