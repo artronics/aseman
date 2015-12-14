@@ -5,13 +5,13 @@
 
     </div>
 
-    <form class="form" role="form">
+    <form class="form" role="form" ng-submit="sendPacket.postPacket()">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="packetType">Type</label>
                 <select name="type" id="packetType" class="form-control" ng-model="sendPacket.packet.type">
-                    <option value="data">DATA</option>
-                    <option value="openPath">OPEN_PATH</option>
+                    <option value="DATA">DATA</option>
+                    <option value="OPEN_PATH">OPEN_PATH</option>
                 </select>
             </div>
 
@@ -31,7 +31,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="payloadLen">Payload Length:</label>
-                <input type="text" id="payloadLen" class="form-control">
+                <input type="text" id="payloadLen" class="form-control" ng-model="sendPacket.payloadLen">
             </div>
 
             <div class="form-group">

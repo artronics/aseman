@@ -14,8 +14,9 @@ angular.module('asemanApp')
 
         self.appendPacket = function (packets) {
             console.log(packets);
-            for (var i = 0; i < packets.length; i++)
+            for (var i = 0; i < packets.length; i++) {
                 self.packets.push(packets[i]);
+            }
         };
 
         self.getNewPackets = function (lastPacketId) {
@@ -28,7 +29,7 @@ angular.module('asemanApp')
                 self.lastPacketId = data.lastPacketId;
 
             });
-        }
+        };
 
         $interval(self.getNewPackets(self.lastPacketId),1000);
 

@@ -21,5 +21,5 @@ angular.module('asemanApp')
                         })
                 ;
             })
-            .service('controllers')
+            .service('controllers');
     }]);
