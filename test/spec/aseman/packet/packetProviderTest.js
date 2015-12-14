@@ -1,6 +1,6 @@
 'use strict';
 
-describe('packetProvider', function () {
+describe('Provider: packetProvider', function () {
 
     var provider;
 
