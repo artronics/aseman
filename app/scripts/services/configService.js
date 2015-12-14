@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('asemanApp')
-    .factory('configService',[function(){
+    .factory('ConfigService',[function(){
 
-       var config = {} ;
+       var ConfigService = {} ;
 
         var ConnectionStatus = Object.freeze({
             NOT_CONFIG:1,
@@ -11,18 +11,18 @@ angular.module('asemanApp')
             CONNECTED:3
         });
 
-        config.network={
+        ConfigService.network={
             isStarted : false,
         };
 
-        config.db = {
+        ConfigService.db = {
             status : ConnectionStatus.NOT_CONFIG,
             url:'127.1.1.1:3306',
             user : 'root',
             pass:''
         };
 
-        config.isConnected = function (cs) {
+        ConfigService.isConnected = function (cs) {
             if(cs === ConnectionStatus.CONNECTED) {
                 return true;
             }
@@ -31,6 +31,6 @@ angular.module('asemanApp')
             }
         };
 
-        return config;
+        return ConfigService;
     }]);
 

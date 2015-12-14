@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('asemanApp')
-    .controller('dbConfigCtrl', ['configService', function (configService) {
+    .controller('dbConfigCtrl', ['ConfigService', function (ConfigService) {
         var self = this;
 
-        self.db= configService.db;
+        self.db= ConfigService.db;
     }]);

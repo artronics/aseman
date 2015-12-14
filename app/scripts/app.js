@@ -10,6 +10,7 @@
  */
 angular
     .module('asemanApp', [
+        'aseman',
         'ngAnimate',
         'ngCookies',
         'ngResource',
