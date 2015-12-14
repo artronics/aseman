@@ -9,14 +9,14 @@ describe('Controller: SendPacketCtrl', function () {
         scope;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller,ConfigService, ControllerService, PacketService,packet) {
+    beforeEach(inject(function ($controller,ConfigService, ControllerService, PacketService,packet,$timeout) {
         packetCtrl = $controller('SendPacketCtrl', {
             //$scope: scope
             // place here mocked dependencies
         });
     }));
-
-    it('should attach a list of awesomeThings to the scope', function () {
-        expect(packetCtrl.foo).toBe('bar');
+    
+    it('should send packets based on query', function(){
+        expect();
     });
 });

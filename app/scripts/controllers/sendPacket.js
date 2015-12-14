@@ -2,12 +2,11 @@
 /*jslint bitwise: true */
 angular.module('asemanApp')
     .controller('SendPacketCtrl',
-        ['ConfigService', 'ControllerService', 'PacketService','packet',
-            function (ConfigService, ControllerService, PacketService,packetProvider) {
+        ['ConfigService', 'ControllerService', 'PacketService','packet','$timeout',
+            function (ConfigService, ControllerService, PacketService,packetProvider,$timeout) {
 
                 var self = this;
                 self.foo = 'bar';
-
                 self.packet = packetProvider.builder()
                     .setSrcIp('localhost:8080')
                     .setDstIp('localhost:6464')
@@ -15,10 +14,10 @@ angular.module('asemanApp')
                     .setDstShortAdd(30)
                     .build();
 
-                self.status = {
+                self.query = {
                     isStarted: false,
                     numOfQueries: 10,
-                    delay: 300,
+                    delay: 1000,
                     numOfSent: 0,
                     numOfSucceed: 0,
                     numOfFailed: 0
@@ -31,32 +30,37 @@ angular.module('asemanApp')
                 };
 
                 self.sendPacket= function () {
-                    if (self.status.isStarted){
+                    if (self.query.isStarted){
                         alert('You can not send packet because there are pending queries.');
                         console.log('There is already queries in queue.');
                         return;
                     }
                     else{
-                        self.status.isStarted=true;
+                        //self.query.isStarted=true;
                     }
 
-                    var packetFactory;
-                    switch (self.packet.type){
-                        case 'DATA':
-                            packetFactory=createDataPacket;
-                            break;
 
-                        default:
-                            console.log('there is no defined factory.');
-                    }
-
-                    var sendQuery=function(){
+                    var sendQuery=function(query,packet){
+                        self.myTimeout = $timeout(self.onTimeout,self.query.delay);
 
                     };
+                    sendQuery(self.query,self.packet);
 
 
                 };
 
+                self.onTimeout= function () {
+                    self.query.numOfSent++;
+                    console.log(self.query.numOfSent);
+                    if (self.query.numOfQueries==self.query.numOfSent){
+                    //if(true){
+                        console.log('he');
+                        $timeout.cancel(self.myTimeout);
+                    }
+                    else{
+                        self.myTimeout = $timeout(self.onTimeout,self.query.delay);
+                    }
+                };
                 ControllerService.getList({status: 'CONNECTED'}).then(function (data) {
                     self.controllers = data.plain();
                 });
