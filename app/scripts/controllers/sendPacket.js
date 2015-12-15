@@ -2,19 +2,23 @@
 /*jslint bitwise: true */
 angular.module('asemanApp')
     .controller('SendPacketCtrl',
-        ['ConfigService', 'ControllerService', 'PacketService','packet','$timeout',
-            function (ConfigService, ControllerService, PacketService,packetProvider,$timeout) {
-
+        ['packet', 'ControllerService',
+            function (packetProvider,ControllerService) {
                 var self = this;
-                self.foo = 'bar';
-                self.packet = packetProvider.builder()
+
+                self.queryResult={};
+                //create a packet model for view
+                self.packetModel = packetProvider.builder()
                     .setSrcIp('localhost:8080')
                     .setDstIp('localhost:6464')
                     .setSrcShortAdd(10)
                     .setDstShortAdd(30)
+                    .setPayload(self.payloadLen)
                     .build();
+                self.packetModel.payloadLen=10;
 
                 self.query = {
+                    isAvailable:false,
                     isStarted: false,
                     numOfQueries: 10,
                     delay: 1000,
@@ -23,6 +27,16 @@ angular.module('asemanApp')
                     numOfFailed: 0
                 };
 
+                //this creates actual packet from model for sending to server
+                var createPacket=function(){
+                    return packetProvider.builder()
+                        .setSrcIp(self.packetModel.srcIp)
+                        .setDstIp(self.packetModel.dstIp)
+                        .setSrcShortAdd(self.packetModel.srcShortAdd)
+                        .setDstShortAdd(self.packetModel.dstShortAdd)
+                        .setPayload(self.packetModel.payloadLen)
+                        .build();
+                };
 
                 var postPacket = function (packet) {
                     //PacketService.post(packet);
@@ -36,26 +50,34 @@ angular.module('asemanApp')
                         return;
                     }
                     else{
-                        //self.query.isStarted=true;
+                        self.query.isStarted=true;
+
+                        queryResult.isAvailable=true;
+                        queryResult.numOfQueries= self.query.numOfQueries;
+                        queryResult.numOfFailed=0;
+                        queryResult.numOfSent=0;
+                        queryResult.numOfSucceed=0;
+                        queryResult.delay = self.query.delay;
+                        queryResult.status = "running";
                     }
 
 
                     var sendQuery=function(query,packet){
                         self.myTimeout = $timeout(self.onTimeout,self.query.delay);
-
                     };
                     sendQuery(self.query,self.packet);
+                };
 
-
+                self.stopQuery = function () {
+                    $timeout.cancel(self.myTimeout);
+                    self.query.isStarted=false;
                 };
 
                 self.onTimeout= function () {
-                    self.query.numOfSent++;
-                    console.log(self.query.numOfSent);
-                    if (self.query.numOfQueries==self.query.numOfSent){
-                    //if(true){
-                        console.log('he');
-                        $timeout.cancel(self.myTimeout);
+                    queryResult.numOfSent++;
+                    postPacket(createPacket());
+                    if (queryResult.numOfQueries===queryResult.numOfSent){
+                        self.stopQuery();
                     }
                     else{
                         self.myTimeout = $timeout(self.onTimeout,self.query.delay);

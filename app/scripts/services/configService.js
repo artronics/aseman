@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('asemanApp')
-    .factory('ConfigService',[function(){
+    .factory('config',[function(){
 
        var ConfigService = {} ;
 
@@ -30,6 +30,9 @@ angular.module('asemanApp')
                 return false;
             }
         };
+        ConfigService.foo=function(){
+            ConfigService.isConnected('kir');
+        }
 
         return ConfigService;
     }]);

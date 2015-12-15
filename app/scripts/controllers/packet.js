@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('asemanApp')
-    .controller('PacketCtrl', ['PacketService','$interval', function (PacketService,$interval) {
+    .controller('PacketCtrl', ['packet','$interval', function (PacketService,$interval) {
         var self = this;
 
         var packet = {

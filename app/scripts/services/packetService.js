@@ -1,24 +1,7 @@
 'use strict';
 
 angular.module('asemanApp')
-    .factory('PacketService', ['Restangular', function (Restangular) {
-
-        //var Service = {};
-        //Service.packets = [];
-        //    //self.packets = [];
-        //Service.getAllPackets= function(){
-        //        var responsePromise = $http.get('http://localhost:8080/rest/packets');
-        //        responsePromise.success(function(data, status, headers, config) {
-        //                Service.packets = data.packets;
-        //                console.log(Service.packets);
-        //        });
-        //        responsePromise.error(function(data, status, headers, config) {
-        //                alert("AJAX failed!");
-        //        });
-        //
-        //};
-        //
-        //return Service;
+    .service('packets', ['Restangular', function (Restangular) {
         return Restangular
 
             .withConfig(function (RestangularConfigurer) {

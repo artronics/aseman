@@ -3,6 +3,23 @@
 
     </div>
     <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12" ng-class="sendPacket.queryResult.isAvailable ? '':'hidden'">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Query Status</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Number of Queries: <span>{{sendPacket.queryResult.numOfQueries}}</span></p>
+                        <p>Number of Sent packets: <span>{{sendPacket.query.numOfSent}}</span></p>
+                        <p>Successful: <span>{{sendPacket.queryResult.numOfSucceed}}</span></p>
+                        <p>Failed: <span>{{sendPacket.queryResult.numOfFailed}}</span></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
         <form class="form" role="form" ng-submit="sendPacket.sendPacket()">
             <!--First row general form info-->
@@ -11,12 +28,14 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="numOfQueries">Number of queries</label>
-                        <input type="text" class="form-control" ng-model="sendPacket.query.numOfQueries"
+                        <input type="text" class="form-control"
+                               ng-model="sendPacket.query.numOfQueries"
                                id="numOfQueries">
                     </div>
                     <div class="form-group">
                         <label for="delay">Delay in ms</label>
-                        <input type="text" class="form-control" ng-model="sendPacket.query.delay"
+                        <input type="text" class="form-control"
+                               ng-model="sendPacket.query.delay"
                                id="delay">
                     </div>
                 </div>
@@ -29,7 +48,7 @@
                     <div class="form-group">
                         <label for="packetType">Type</label>
                         <select name="type" id="packetType" class="form-control"
-                                ng-model="sendPacket.packet.type">
+                                ng-model="sendPacket.packetModel.type">
                             <option value="DATA">DATA</option>
                             <option value="OPEN_PATH">OPEN_PATH</option>
                         </select>
@@ -38,13 +57,15 @@
                     <div class="form-group">
                         <label for="srcAdd">Source Address:</label>
                         <input type="text" id="srcAdd" class="form-control"
-                               ng-model="sendPacket.packet.srcShortAdd">
+                               ng-model="sendPacket.packetModel.srcShortAdd">
                     </div>
 
                     <div class="form-group">
                         <label for="ctrlIpTo">To:</label>
-                        <select class="form-control" id="ctrlIpTo" ng-model="sendPacket.packet.dstIp">
-                            <option value="{{ctrl.ip}}" ng-repeat="ctrl in sendPacket.controllers">
+                        <select class="form-control" id="ctrlIpTo"
+                                ng-model="sendPacket.packetModel.dstIp">
+                            <option value="{{ctrl.ip}}"
+                                    ng-repeat="ctrl in sendPacket.controllers">
                                 {{ctrl.ip}}
                             </option>
                         </select>
@@ -56,25 +77,32 @@
                     <div class="form-group">
                         <label for="payloadLen">Payload Length:</label>
                         <input type="text" id="payloadLen" class="form-control"
-                               ng-model="sendPacket.payloadLen">
+                               ng-model="sendPacket.packetModel.payloadLen">
                     </div>
 
                     <div class="form-group">
                         <label for="dstAdd">Destination Address:</label>
                         <input type="text" id="dstAdd" class="form-control"
-                               ng-model="sendPacket.packet.dstShortAdd">
+                               ng-model="sendPacket.packetModel.dstShortAdd">
                     </div>
                     <div class="form-group">
                         <label for="ctrlIpFrom">From:</label>
-                        <select class="form-control" id="ctrlIpFrom" ng-model="sendPacket.packet.srcIp">
-                            <option value="{{ctrl.ip}}" ng-repeat="ctrl in sendPacket.controllers">
+                        <select class="form-control" id="ctrlIpFrom"
+                                ng-model="sendPacket.packetModel.srcIp">
+                            <option value="{{ctrl.ip}}"
+                                    ng-repeat="ctrl in sendPacket.controllers">
                                 {{ctrl.ip}}
                             </option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Send" class="btn btn-primary"/>
+                        <a href="" class="btn btn-danger"
+                           ng-class="sendPacket.query.isStarted ? '':'disabled'"
+                           ng-click="sendPacket.stopQuery()">Stop</a>
+
+                        <input type="submit" value="Start" class="btn btn-primary"
+                               ng-class="sendPacket.query.isStarted ? 'disabled':''"/>
                     </div>
 
                 </div>

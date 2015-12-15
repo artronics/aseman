@@ -1,6 +1,5 @@
-'use strict';
 // Karma configuration
-// Generated on Mon Dec 14 2015 09:42:43 GMT+0100 (CET)
+// Generated on Tue Dec 15 2015 00:41:08 GMT+0100 (CET)
 
 module.exports = function(config) {
   config.set({
@@ -16,31 +15,28 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      '../../../../bower_components/jquery/dist/jquery.js',
+      '../../../../bower_components/angular/angular.js',
+      '../../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
+      '../../../../bower_components/angular-animate/angular-animate.js',
+      '../../../../bower_components/angular-cookies/angular-cookies.js',
+      '../../../../bower_components/angular-resource/angular-resource.js',
+      '../../../../bower_components/angular-route/angular-route.js',
+      '../../../../bower_components/angular-sanitize/angular-sanitize.js',
+      '../../../../bower_components/angular-touch/angular-touch.js',
+      '../../../../bower_components/angular-ui-grid/ui-grid.js',
+      '../../../../bower_components/lodash/lodash.js',
+      '../../../../bower_components/restangular/dist/restangular.js',
+      '../../../../bower_components/angular-mocks/angular-mocks.js',
 
-      '../../../bower_components/jquery/dist/jquery.js',
-      '../../../bower_components/angular/angular.js',
-      '../../../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
-      '../../../bower_components/angular-animate/angular-animate.js',
-      '../../../bower_components/angular-cookies/angular-cookies.js',
-      '../../../bower_components/angular-resource/angular-resource.js',
-      '../../../bower_components/angular-route/angular-route.js',
-      '../../../bower_components/angular-sanitize/angular-sanitize.js',
-      '../../../bower_components/angular-touch/angular-touch.js',
-      '../../../bower_components/angular-ui-grid/ui-grid.js',
-      '../../../bower_components/lodash/lodash.js',
-      '../../../bower_components/restangular/dist/restangular.js',
-      '../../../bower_components/angular-mocks/angular-mocks.js',
+      "../../../../app/scripts/**/*.js",
 
-      "../../../app/scripts/**/*.js",
-
-
-      '**/*.js'
+      '*.js'
     ],
 
 
     // list of files to exclude
     exclude: [
-        'dummyTest/*.js'
     ],
 
 
@@ -85,5 +81,5 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultanous
     concurrency: Infinity
-  });
-};
+  })
+}
